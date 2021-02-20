@@ -61,6 +61,13 @@ public class CourseDaoTest {
 		int res = dao.deleteCourse("60001");
 		System.out.println(res);
 	}
+	
+	@Test
+	public void test6GetCourseCount() {
+		System.out.println("testGetCourseCount");
+		int res = dao.getCourseCount();
+		System.out.println(res);
+	}
 }
 
 

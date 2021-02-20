@@ -115,6 +115,20 @@ public class CourseDao {
 		}
 		return 0;
 	}
+	
+	public int getCourseCount() {
+		String sql = "SELECT COUNT(ID) FROM COURSE_TBL";
+		try(Connection con = JdbcUtil.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()){
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }
 
 
