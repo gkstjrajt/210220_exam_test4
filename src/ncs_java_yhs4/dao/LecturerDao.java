@@ -104,6 +104,22 @@ public class LecturerDao {
 		}
 		return 0;
 	}
+	
+	public int getCountName(String name) {
+		String sql = "SELECT COUNT(NAME) FROM LECTURER_TBL WHERE NAME = ?";
+		try(Connection con = JdbcUtil.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+				pstmt.setString(1, name);
+				try(ResultSet rs = pstmt.executeQuery()){
+					if(rs.next()) {
+						return rs.getInt(1);
+					}
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }
 
 

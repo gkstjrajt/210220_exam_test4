@@ -49,4 +49,11 @@ public class LecturerDaoTest {
 		int res = dao.deleteLecturer(idx);
 		System.out.println(res);
 	}
+	
+	@Test
+	public void test5GetCountName() {
+		System.out.println("testGetCountName");
+		int res = dao.getCountName("김교수");
+		System.out.println(res);
+	}
 }
