@@ -91,6 +91,19 @@ public class LecturerDao {
 		return 0;
 	}
 	
+	public int getNextIdx() {
+		String sql = "SELECT MAX(IDX)+1 FROM LECTURER_TBL";
+		try(Connection con = JdbcUtil.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()){
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }
 
 

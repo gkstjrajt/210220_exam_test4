@@ -11,6 +11,12 @@ public class Course {
 
 	public Course() {
 	}
+	
+	public Course(String name, int credit, String lecturer) {
+		this.name = name;
+		this.credit = credit;
+		this.lecturer = lecturer;
+	}
 
 	public Course(String id, String name, int credit, String lecturer, int week, int start_hour, int end_end) {
 		this.id = id;

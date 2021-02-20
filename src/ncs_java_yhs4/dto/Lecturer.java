@@ -9,6 +9,10 @@ public class Lecturer {
 	public Lecturer() {
 	}
 
+	public Lecturer(String name) {
+		this.name = name;
+	}
+
 	public Lecturer(int idx, String name, String major, String field) {
 		this.idx = idx;
 		this.name = name;

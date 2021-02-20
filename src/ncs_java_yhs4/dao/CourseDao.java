@@ -9,6 +9,7 @@ import java.util.List;
 
 import ncs_java_yhs4.ds.JdbcUtil;
 import ncs_java_yhs4.dto.Course;
+import ncs_java_yhs4.dto.Lecturer;
 
 public class CourseDao {
 	private static final CourseDao instance = new CourseDao();
@@ -128,6 +129,33 @@ public class CourseDao {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+	
+	public List<Course> selectCoursesOfLecturer(String lecturer){
+		String sql = "SELECT c.NAME AS NAME, CREDIT, l.NAME AS LECTURER FROM COURSE_TBL c JOIN LECTURER_TBL l ON c.LECTURER = l.IDX WHERE LECTURER = ?";
+		try(Connection con = JdbcUtil.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+				pstmt.setString(1, lecturer);
+				try(ResultSet rs = pstmt.executeQuery()){
+					if(rs.next()) {
+						List<Course> list = new ArrayList<Course>();
+						do {
+							list.add(getCoursesOfLecturer(rs));
+						}while(rs.next());
+						return list;
+					}
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	private Course getCoursesOfLecturer(ResultSet rs) throws SQLException {
+		String name = rs.getString("NAME");
+		int credit = rs.getInt("CREDIT");
+		String lecturer = rs.getString("LECTURER");
+		return new Course(name, credit, lecturer);
 	}
 }
 
